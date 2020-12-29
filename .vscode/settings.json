@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "pyplot",
+        "tqdm",
         "xlabel",
         "xlrd",
         "ylabel"
