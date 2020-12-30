@@ -6,16 +6,19 @@ from tqdm import tqdm
 
 
 def x_y_labels(file_path):
-    try:
-        book = load_workbook(file_path)
-        sheet = book.active
-        x_value = sheet.cell(row=1, column=1).value
-        y_value = sheet.cell(row=1, column=2).value
-    except:
-        x_value = "NULL"
-        y_value = "NULL"
-    return(x_value, y_value)
-
+    book = load_workbook(file_path)
+    sheet = book.active
+    x_value = sheet.cell(row=1, column=1).value
+    y_value = sheet.cell(row=1, column=2).value
+    print("x axis:", x_value)
+    print("y axis:", y_value)
+    c = input("Proceed? (y/n): ").lower().strip()
+    if c == 'n':
+        print("Swaping x and y axis values")
+        x_value, y_value = y_value, x_value
+        return(x_value, y_value)
+    else:
+        return(x_value, y_value)
 
 def main():
     list_of_file = os.listdir('excel_file')
@@ -23,11 +26,11 @@ def main():
     if len(list_of_file) == 0:
         raise Exception("Error! No files found")
     else:
-        x_value, y_value = x_y_labels(file_path)
         excel_file = pd.ExcelFile(file_path)
         number_of_sheets = len(excel_file.sheet_names)
         print("File name:", list_of_file[0])
         print("Number of sheets:", number_of_sheets, "\n")
+        x_value, y_value = x_y_labels(file_path)
         for sheet_name in tqdm(excel_file.sheet_names):
             sheet_data = pd.read_excel(excel_file, sheet_name)
             df = pd.DataFrame(sheet_data, columns=[x_value,  y_value])
