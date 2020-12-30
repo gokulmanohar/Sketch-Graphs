@@ -1,9 +1,18 @@
 {
     "cSpell.words": [
+        "alph",
+        "arange",
+        "disp",
+        "numpy",
         "pyplot",
+        "rcdefaults",
+        "srch",
+        "tablefmt",
+        "tfilename",
         "tqdm",
         "xlabel",
         "xlrd",
+        "xticks",
         "ylabel"
     ]
 }
